@@ -17,15 +17,42 @@
   .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix{padding:0.8375em 0;}
 </style>
 
-<!-- Toolbar -->
-<mat-toolbar color="primary" class="app-header">
-  <div><a href="https://it.chili.com/" target="_blank" class="mat-button">Chili S.p.A.</a></div>
-  <span class="nav-tool-items">
-    <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
-    <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
-    <a mat-button (click)="logOut()">Log out</a>
-  </span>
-</mat-toolbar>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" (ngSubmit)="submit()">
+
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" [(ngModel)]="registration.username" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" [(ngModel)]="registration.mail" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" [(ngModel)]="registration.password" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Choose a role...</mat-label>
+          <mat-select [(ngModel)]="registration.role" [ngModelOptions]="{standalone: true}">
+            <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <button mat-stroked-button color="accent" class="btn-block" type="ngSubmit">Register</button>
+
+    </form>
+  </mat-card>
+</div>
 
 
 <router-outlet></router-outlet>
