@@ -11,7 +11,7 @@ import {SESSION_STORAGE, StorageService} from 'angular-webstorage-service';
 })
 export class WelcomeComponent implements OnInit {
 
-  user: UserCredential;
+  user: User;
 
   constructor(private firebaseService: FirebaseService, @Inject(SESSION_STORAGE) private storage: StorageService) {
   }

@@ -43,21 +43,19 @@ export class FirebaseService {
   }
 
   loginWithSocial(provider: AuthProvider) {
-    console.log(`login with ${provider.providerId}`);
-    auth().signInWithRedirect(provider)
+    auth().signInWithPopup(provider)
       .catch(reason => {
         console.log(`${reason.code}, ${reason.message}`);
       });
 
-    auth().getRedirectResult()
-      .catch(reason => {
-        console.log(`${reason.code}, ${reason.message}`);
-      })
-      .then(value => {
-        console.log(`current-user ${value}`);
-        this.storage.set('current-user', value);
-      });
+    auth().onAuthStateChanged(a => {
+      if (a) {
+        console.log(`current-user ${auth().currentUser}`);
+        this.storage.set('current-user', a);
+        this.router.navigate(['welcome']);
+      }
 
+    });
   }
 
   getRedirect() {
