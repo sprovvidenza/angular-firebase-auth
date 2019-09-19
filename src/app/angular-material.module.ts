@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 import {
   MatButtonModule,
@@ -65,4 +65,5 @@ import {
   ]
 })
 
-export class AngularMaterialModule { }
+export class AngularMaterialModule {
+}

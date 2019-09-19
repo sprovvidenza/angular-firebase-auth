@@ -4,5 +4,6 @@ export class Registration {
     public password?: string,
     public mail?: string,
     public role?: string
-  ) {}
+  ) {
+  }
 }

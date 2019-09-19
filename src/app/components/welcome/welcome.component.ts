@@ -3,6 +3,7 @@ import {FirebaseService} from '../../firebase.service';
 import UserCredential = firebase.auth.UserCredential;
 import {User} from 'firebase';
 import {SESSION_STORAGE, StorageService} from 'angular-webstorage-service';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-welcome',
@@ -11,14 +12,21 @@ import {SESSION_STORAGE, StorageService} from 'angular-webstorage-service';
 })
 export class WelcomeComponent implements OnInit {
 
-  user: User;
+  token: any;
+  principal: any;
 
-  constructor(private firebaseService: FirebaseService, @Inject(SESSION_STORAGE) private storage: StorageService) {
+  constructor(private firebaseService: FirebaseService,
+              @Inject(SESSION_STORAGE) private storage: StorageService,
+              private apiService: ApiService) {
   }
 
   ngOnInit() {
-    this.user = this.storage.get('current-user');
-    console.log(`WelcomeComponent -  ${JSON.stringify(this.user)}`);
+    this.token = this.storage.get('token');
+
+    this.apiService.getPrincipal(this.token).subscribe(value => {
+      console.log(value);
+      this.principal = value;
+    });
   }
 
 }

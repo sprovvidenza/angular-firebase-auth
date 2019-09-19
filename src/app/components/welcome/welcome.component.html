@@ -27,6 +27,7 @@
 
   .login-wrapper {
     height: 100%;
+    max-width: 400px;
   }
 
   .positronx {
@@ -113,13 +114,9 @@
 
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="left center">
   <mat-list>
-<!--    <mat-list-item><div><p>Token: {{user.getIdToken(false)}}</p></div></mat-list-item>-->
-    <mat-list-item><div><p>RefreshToken: {{user}}</p> <br></div></mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><div><p>UserName: {{user.displayName}}</p> <br></div></mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><div><p>Email: {{user.email}}</p> <br></div></mat-list-item>
-    <mat-divider></mat-divider>
+    <!--    <mat-list-item><div><p>Token: {{user.getIdToken(false)}}</p></div></mat-list-item>-->
+    <mat-list-item>
+      <ngx-json-viewer [json]="principal" ></ngx-json-viewer>
+    </mat-list-item>
   </mat-list>
-<!--  {{user.getIdToken()}}-->
 </div>

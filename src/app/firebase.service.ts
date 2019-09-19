@@ -35,7 +35,7 @@ export class FirebaseService {
       .catch(reason => {
         console.log(`${reason.code}, ${reason.message}`);
       });
-    this.storage.set('current-user', auth().currentUser);
+    this.storage.set('token', auth().currentUser.getIdToken(true));
   }
 
   loggedUser() {
@@ -50,8 +50,9 @@ export class FirebaseService {
 
     auth().onAuthStateChanged(a => {
       if (a) {
-        console.log(`current-user ${auth().currentUser}`);
-        this.storage.set('current-user', a);
+        console.log(`token ${auth().currentUser.getIdToken(true)}`);
+        a.getIdToken(true).then(value => this.storage.set('token', value));
+
         this.router.navigate(['welcome']);
       }
 
@@ -64,12 +65,11 @@ export class FirebaseService {
     });
   }
 
-
   logOut() {
     auth().signOut()
       .then(value => {
         console.log('logout');
-        this.storage.remove('current-user');
+        this.storage.remove('token');
         this.router.navigate(['login']);
       });
   }

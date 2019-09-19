@@ -21,8 +21,9 @@ export class LogInComponent implements OnInit {
 
   ngOnInit() {
     this.providers.set('google', new firebase.auth.GoogleAuthProvider());
-    const user = this.storage.get('current-user');
-    if (user) {
+    this.providers.set('facebook', new firebase.auth.FacebookAuthProvider());
+    const token = this.storage.get('token');
+    if (token) {
       this.router.navigate(['welcome']);
     }
   }
