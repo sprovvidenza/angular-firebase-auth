@@ -29,13 +29,22 @@ export class FirebaseService {
 
   login(user: User) {
     auth().signInWithEmailAndPassword(user.mail, user.password)
-      .then(value => {
-        this.storage.set('user', value);
-      })
       .catch(reason => {
         console.log(`${reason.code}, ${reason.message}`);
       });
-    this.storage.set('token', auth().currentUser.getIdToken(true));
+
+    auth().onAuthStateChanged(a => {
+      if (a) {
+        console.log(`token ${JSON.stringify(a)}`);
+        a.getIdToken(true).then(value => {
+          this.storage.set('token', value);
+          this.router.navigate(['welcome']);
+        });
+
+
+      }
+    });
+    // this.storage.s/et('token', auth().currentUser.getIdToken(true));
   }
 
   loggedUser() {
@@ -51,9 +60,10 @@ export class FirebaseService {
     auth().onAuthStateChanged(a => {
       if (a) {
         console.log(`token ${auth().currentUser.getIdToken(true)}`);
-        a.getIdToken(true).then(value => this.storage.set('token', value));
-
-        this.router.navigate(['welcome']);
+        a.getIdToken(true).then(value => {
+          this.storage.set('token', value);
+          this.router.navigate(['welcome']);
+        });
       }
 
     });

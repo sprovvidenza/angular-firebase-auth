@@ -14,6 +14,7 @@ export class WelcomeComponent implements OnInit {
 
   token: any;
   principal: any;
+  valid: any;
 
   constructor(private firebaseService: FirebaseService,
               @Inject(SESSION_STORAGE) private storage: StorageService,
@@ -29,4 +30,23 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
+  validate() {
+
+    this.token = this.storage.get('token');
+
+    this.apiService.validate(this.token).subscribe(value => {
+      console.log(value);
+      this.valid = value;
+    });
+
+  }
+
+  revoke() {
+    this.token = this.storage.get('token');
+
+    this.apiService.revoke(this.token).subscribe(value => {
+      console.log(value);
+      this.valid = value;
+    });
+  }
 }

@@ -34,7 +34,7 @@ export class LogInComponent implements OnInit {
 
   submit() {
     this.firebaseService.login(this.user);
-    this.router.navigate(['welcome']);
+    // this.router.navigate(['welcome']);
   }
 
   selectProvider(value) {

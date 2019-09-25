@@ -110,13 +110,25 @@
   .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
     padding: 0.8375em 0;
   }
+
+  .token {
+    width: 700px;
+  ;
+  }
 </style>
 
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="left center">
-  <mat-list>
-    <!--    <mat-list-item><div><p>Token: {{user.getIdToken(false)}}</p></div></mat-list-item>-->
+  <mat-list fxLayout="row">
     <mat-list-item>
       <ngx-json-viewer [json]="principal" ></ngx-json-viewer>
     </mat-list-item>
+
+    <mat-list-item fxLayout="row" >
+      <ngx-json-viewer  class="token" [json]="token" ></ngx-json-viewer>
+      <button mat-button (click)="validate()">Validate</button>
+      <button mat-button (click)="revoke()">Revoke</button>
+      <ngx-json-viewer  class="token" [json]="valid" ></ngx-json-viewer>
+    </mat-list-item>
+
   </mat-list>
 </div>
